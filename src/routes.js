@@ -1,4 +1,4 @@
-const { Router } = require('express'); // requisita APENAS A PARTE DE ROTEAMENTO do express
+import { Router } from 'express'; // requisita APENAS A PARTE DE ROTEAMENTO do express
 
 const routes = new Router();
 
@@ -7,4 +7,5 @@ routes.get('/', (req, res) => {
 });
 
 // exporta as rotas criadas para serem acessadas
-module.exports = routes;
+// module.exports = routes; // metodo antigo
+export default routes;
