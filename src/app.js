@@ -3,8 +3,14 @@ import mongoose from 'mongoose';
 import routes from './routes'; // requisita o arquivo routes.js (não é uma dependência!)
 
 
-/* ---------------------------- Notas Gerais de Configuração ----------------------------
+/* -------------------------------- Notas Gerais de Configuração --------------------------------
 
+
+O objetivo deste software é ser o meu maior suporte de todos para a criação de qualquer
+aplicação. Sempre que eu precisar criar uma aplicação esta vai ser a base, então vai ser o 
+melhor documentado possível.
+
+----------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
 | yarn add sucrase nodemon -D                                                           |
@@ -14,6 +20,7 @@ import routes from './routes'; // requisita o arquivo routes.js (não é uma dep
 | -D      | instala como dependência de desenvolvedor                                   |
 -----------------------------------------------------------------------------------------
 
+----------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
 | O server não executa como antes (node src/server.js) após as atualizações com Sucrase |
@@ -26,6 +33,7 @@ import routes from './routes'; // requisita o arquivo routes.js (não é uma dep
 | 4. O projeto pode ser executado com yarn dev.                                         |
 -----------------------------------------------------------------------------------------
 
+----------------------------------------------------------------------------------------------
 
 Utilizando MongoDB: https://www.mongodb.com/atlas/database
 
@@ -41,8 +49,23 @@ Utilizando MongoDB: https://www.mongodb.com/atlas/database
 
 4. Após importar o Mongoose, a conexão ao banco é realizada dentro do método constructor.
 
+----------------------------------------------------------------------------------------------
 
------------------------------------- Fim das Notas ------------------------------------ */
+Utilizando arquitetura MVC:
+
+Model:      Representa a tabela da aplicação no banco.
+            Models são criados SEMPRE com a primeira letra em maiúsculo.
+            Também são criados SEMPRE em singular.
+
+View:       Representa o front-end (react.js, vue.js, etc.).
+
+Controller: Trata requisições e devolve respostas para a rota.
+
+----------------------------------------------------------------------------------------------
+
+Algumas notas antigas importantes estão no meu crud, da minha pasta de estudo.
+
+----------------------------------------- Fim das Notas ---------------------------------------- */
 
 
 class App{
@@ -78,5 +101,5 @@ class App{
 }
 
 // exporta a classe App (selecionando o server)
-// module.exports = new App().server; // metodo antigo
 export default new App().server;
+// module.exports = new App().server; // metodo antigo
