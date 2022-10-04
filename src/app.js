@@ -63,20 +63,31 @@ Controller: Trata requisições e devolve respostas para a rota.
 
 ----------------------------------------------------------------------------------------------
 
+Multer
+
+Após a utilização do Multipart formdata no Insomnia para enviar os dados da casa ao banco,
+foi necessário instalar uma nova biblioteca para enviar arquivos: yarn add multer
+
+No inicio, os dados enviados eram apenas em JSON.
+
+Configurado em: config/upload.js
+
+----------------------------------------------------------------------------------------------
+
 Algumas notas antigas importantes estão no meu crud, da minha pasta de estudo.
 
 ----------------------------------------- Fim das Notas ---------------------------------------- */
 
 
-class App{
+class App {
     // quando a classe app for chamada, o método construtor é o primeiro a ser iniciado automáticamente
-    constructor(){
+    constructor() {
         // o this é necessário para referenciar a classe App
-        this.server = express(); 
-        
+        this.server = express();
+
         // connection string
         const URI = 'mongodb+srv://papauluk:SYTwbyWg59L05zmx@devhouse.hyory8h.mongodb.net/?retryWrites=true&w=majority';
-        
+
         // conecta ao banco de dados mongodb
         mongoose.connect(URI, {
             useNewUrlParser: true,
@@ -88,14 +99,14 @@ class App{
         this.routes();
     }
 
-    middlewares(){
+    middlewares() {
         // consta que vai usar JSON no express
         this.server.use(express.json());
     }
 
-    routes(){
+    routes() {
         // chama as rotas da importação
-        this.server.use(routes); 
+        this.server.use(routes);
     }
 
 }
