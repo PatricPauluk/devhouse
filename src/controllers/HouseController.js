@@ -1,18 +1,19 @@
+import House from '../models/House';
+
 class HouseController{
 
     async store(req, res){
 
-        /* Primeiro envio teste. Resultado no console de req.body:
+        /*  Primeiro envio teste. console.log(req.body);
         {
             description: 'Photo by Pixasquare on Unsplash',     
             price: '1200',
             location: 'https://unsplash.com/photos/4ojhpgKpS68',
             status: 'true'
         }
-        */
-        console.log(req.body);
         
-        /* Primeiro envio teste. Resultado no console de req.file:
+
+            Primeiro envio teste. console.log(req.file);
         {
             fieldname: 'thumbnail',
             originalname: 'first-house-test.jpg',
@@ -27,9 +28,30 @@ class HouseController{
         Temos acesso aos dados do arquivo, pois as configurações de uploads são passadas por parâmetro em routes.js
 
         */
-        console.log(req.file);
         
-        return res.json({ ok: true })
+        // Captura de dados enviados pelo Insomnia (Multipart)
+        const { filename } = req.file; // Thumbnail
+        const { description, price, location, status } = req.body;
+        const { user_id } = req.headers;
+
+        /* Cadastro no banco
+
+        Exceto user e thumbnail, os outros dados não precisam ser informados como
+        por exemplo:
+        description: description
+
+        Pois é o mesmo nome informado no model, então se tornaria redundante.
+        */
+        const house = await House.create({
+            user: user_id,
+            thumbnail: filename,
+            description,
+            price,
+            location,
+            status,
+        });
+
+        return res.json(house)
     }
 
 }

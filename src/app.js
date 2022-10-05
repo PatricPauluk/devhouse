@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import path from 'path';
 import routes from './routes'; // requisita o arquivo routes.js (não é uma dependência!)
 
 
@@ -100,6 +101,13 @@ class App {
     }
 
     middlewares() {
+
+        // uma rota criada dentro dos middlewares, para visualizar a thumbnail retornada
+        this.server.use(
+            '/files',
+            express.static(path.resolve(__dirname, '..', 'uploads'))
+        );
+
         // consta que vai usar JSON no express
         this.server.use(express.json());
     }

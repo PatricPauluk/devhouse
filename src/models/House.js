@@ -16,8 +16,19 @@ const HouseSchema = new Schema({
         type: Schema.Types.ObjectId, // referencia o id do usuário
         ref: 'User' // referencia ao user
     }
+}, {
+    toJSON: {
+        // Tnsere a variável virtual com a requisição
+        virtuals: true
+    }
 });
 
+/* Configuração do campo de URL para a thumbnail ser visualizada pelo usuário
+Virtual: campo virtual, não vai ser registrado no banco, apenas retorna para o usuário uma URL.
+*/
+HouseSchema.virtual('thumbnail_url').get(function(){
+    return `http://localhost:3333/files/${this.thumbnail}`;
+})
 
 
 export default model('House', HouseSchema);
