@@ -1,4 +1,5 @@
 import House from '../models/House';
+import User from '../models/User';
 
 class HouseController{
 
@@ -18,7 +19,7 @@ class HouseController{
         return res.json(houses);
     }
 
-    // Cadastro no banco
+    // Cadastrar casas
     async store(req, res){
 
         /*  Primeiro envio teste. console.log(req.body);
@@ -69,6 +70,59 @@ class HouseController{
         });
 
         return res.json(house)
+    }
+
+    // Atualizar casas
+    async update(req, res) {
+
+        // Captura os dados informados
+        const { filename } = req.file; // Thumbnail
+        const { house_id } = req.params;
+        const { description, price, location, status } = req.body;
+        const { user_id } = req.headers;
+
+        // Captura o id do usuário logado e da casa a ser alterada
+        const user = await User.findById(user_id);
+        const houses = await House.findById(house_id);
+
+        // Verifica se o usuário logado tem permissão para alterar a casa (se foi ele quem cadastrou)
+        if (String(user._id) !== String(houses.user)){
+            return res.status(401).json({ error: 'Não autorizado.' });
+        }
+
+        // Busca o id da casa a ser atualizada, e atualiza em seguida
+        await House.updateOne({ _id: house_id }, {
+            user: user_id,
+            thumbnail: filename,
+            description,
+            price,
+            location,
+            status,
+        });
+
+        // return res.json(houses);
+        return res.send();
+    }
+
+    // Excluir casas
+    async destroy(req, res) {
+
+        // Captura o ID da casa e do Usuário
+        const { house_id } = req.body;
+        const { user_id } = req.headers;
+
+        // Captura o id do usuário logado e da casa a ser alterada
+        const user = await User.findById(user_id);
+        const houses = await House.findById(house_id);
+
+        // Verifica se o usuário logado tem permissão para excluir a casa (se foi ele quem cadastrou)
+        if (String(user._id) !== String(houses.user)){
+            return res.status(401).json({ error: 'Não autorizado.' });
+        }
+
+        await House.findByIdAndDelete({ _id: house_id });
+
+        return res.json({ message: 'Excluída com sucesso!' })
     }
 
 }

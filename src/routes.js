@@ -35,9 +35,11 @@ upload.single('thumbnail')
 Thumbnail é o nome do campo enviado pelo Insomnia, que também consta no model de House.
 
 */
-routes.post('/sessions', SessionController.store);
-routes.post('/houses', upload.single('thumbnail'), HouseController.store);
-routes.get('/houses', HouseController.index);
+routes.post('/sessions', SessionController.store); // Cadastra email
+routes.post('/houses', upload.single('thumbnail'), HouseController.store); // Cadastra casa
+routes.get('/houses', HouseController.index); // Busca/exibe casas
+routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.update); // Atualiza casa
+routes.delete('/houses', HouseController.destroy); // Exclui casa
 
 // exporta as rotas criadas para serem acessadas
 // module.exports = routes; // metodo antigo
