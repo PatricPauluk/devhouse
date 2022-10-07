@@ -2,6 +2,23 @@ import House from '../models/House';
 
 class HouseController{
 
+    /* Listar casas disponíves
+    Para listar as casas disponíveis, o filtro é enviado no query porams do Insomnia
+    */
+    async index(req, res){
+        // Captura o status enviado pelo query params
+        const { status } = req.query;
+
+        /* Busca todas as casas com o status informado
+        Mais uma vez, status poderia ser escrito como status:status
+        */
+        const houses = await House.find({ status });
+
+        // Retorna as casas do filtro
+        return res.json(houses);
+    }
+
+    // Cadastro no banco
     async store(req, res){
 
         /*  Primeiro envio teste. console.log(req.body);

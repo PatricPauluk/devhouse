@@ -37,6 +37,7 @@ Thumbnail é o nome do campo enviado pelo Insomnia, que também consta no model 
 */
 routes.post('/sessions', SessionController.store);
 routes.post('/houses', upload.single('thumbnail'), HouseController.store);
+routes.get('/houses', HouseController.index);
 
 // exporta as rotas criadas para serem acessadas
 // module.exports = routes; // metodo antigo
