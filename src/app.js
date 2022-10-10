@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
+import cors from 'cors';
 import routes from './routes'; // requisita o arquivo routes.js (não é uma dependência!)
 
 
@@ -75,6 +76,14 @@ Configurado em: config/upload.js
 
 ----------------------------------------------------------------------------------------------
 
+Cors
+
+Controla a API a ser consumida por apenas um ou vários domínios.
+
+yarn add cors
+
+----------------------------------------------------------------------------------------------
+
 Algumas notas antigas importantes estão no meu crud, da minha pasta de estudo.
 
 ----------------------------------------- Fim das Notas ---------------------------------------- */
@@ -101,6 +110,9 @@ class App {
     }
 
     middlewares() {
+
+        // libera a API a ser utilizada por qualquer domínio
+        this.server.use(cors());
 
         // uma rota criada dentro dos middlewares, para visualizar a thumbnail retornada
         this.server.use(
