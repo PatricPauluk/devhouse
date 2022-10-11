@@ -1,7 +1,7 @@
 import House from '../models/House';
 
 // Exibe as casas cadastradas de apenas um usuário
-class DashboardController {
+class DashboardController{
 
     async show(req, res){
         

@@ -1,0 +1,123 @@
+---------------- USUÁRIOS ----------------
+
+{
+	"_id": "633aff3101af82673abc3941",
+	"email": "demo@demo.com",
+	"__v": 0
+}
+
+{
+	"_id": "633b0e17561dafabb24af426",
+	"email": "patric@demo.com",
+	"__v": 0
+}
+
+
+
+---------------- CASAS DE demo@demo.com ----------------
+
+[
+	{
+		"_id": "633cc621f74b0790443f09b4",
+		"thumbnail": "first-house-test-1664927265812.jpg",
+		"description": "Photo by Pixasquare on Unsplash",
+		"price": 1200,
+		"location": "https://unsplash.com/photos/4ojhpgKpS68",
+		"status": true,
+		"user": "633aff3101af82673abc3941",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/first-house-test-1664927265812.jpg",
+		"id": "633cc621f74b0790443f09b4"
+	},
+	{
+		"_id": "6345815e7fde6ad77416beee",
+		"thumbnail": "jennifer-r-sZ9F_XkGJfI-unsplash-1665499486580.jpg",
+		"description": "Photo by Jennifer R. on Unsplash",
+		"price": 8845,
+		"location": "Portland, Maine, USA",
+		"status": true,
+		"user": "633aff3101af82673abc3941",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/jennifer-r-sZ9F_XkGJfI-unsplash-1665499486580.jpg",
+		"id": "6345815e7fde6ad77416beee"
+	},
+	{
+		"_id": "634581897fde6ad77416bef0",
+		"thumbnail": "trinity-nguyen-xQhqS7OWEqE-unsplash-1665499529081.jpg",
+		"description": "Photo by Trinity Nguyen on Unsplash",
+		"price": 3496,
+		"location": "Published on September 6, 2020 (No Location)",
+		"status": true,
+		"user": "633aff3101af82673abc3941",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/trinity-nguyen-xQhqS7OWEqE-unsplash-1665499529081.jpg",
+		"id": "634581897fde6ad77416bef0"
+	},
+	{
+		"_id": "634581d97fde6ad77416bef4",
+		"thumbnail": "alexander-andrews-Dr6VBM0KNsw-unsplash-1665499609638.jpg",
+		"description": "Photo by Alexander Andrews on Unsplash",
+		"price": 8874,
+		"location": "Published on November 20, 2019",
+		"status": false,
+		"user": "633aff3101af82673abc3941",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/alexander-andrews-Dr6VBM0KNsw-unsplash-1665499609638.jpg",
+		"id": "634581d97fde6ad77416bef4"
+	}
+]
+
+
+
+---------------- CASAS DE patric@demo.com ----------------
+
+[
+	{
+		"_id": "63457f917fde6ad77416bede",
+		"thumbnail": "luke-stackpoole-eWqOgJ-lfiI-unsplash-1665499025865.jpg",
+		"description": "Photo by Johnson Johnson on Unsplash (Altered)",
+		"price": 4213,
+		"location": "Westfjords Region, Iceland",
+		"status": true,
+		"user": "633b0e17561dafabb24af426",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/luke-stackpoole-eWqOgJ-lfiI-unsplash-1665499025865.jpg",
+		"id": "63457f917fde6ad77416bede"
+	},
+	{
+		"_id": "63457fc07fde6ad77416bee0",
+		"thumbnail": "vu-anh-TiVPTYCG_3E-unsplash-1665499273065.jpg",
+		"description": "Photo by vu anh on Unsplash",
+		"price": 3321,
+		"location": "Published on September 16, 2019 (No Location)",
+		"status": true,
+		"user": "633b0e17561dafabb24af426",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/vu-anh-TiVPTYCG_3E-unsplash-1665499273065.jpg",
+		"id": "63457fc07fde6ad77416bee0"
+	},
+	{
+		"_id": "63457ff27fde6ad77416bee2",
+		"thumbnail": "scott-webb-1ddol8rgUH8-unsplash-1665499122635.jpg",
+		"description": "Photo by Scott Webb on Unsplash",
+		"price": 1221,
+		"location": "Fanshawe Pioneer Village, London, Canada",
+		"status": true,
+		"user": "633b0e17561dafabb24af426",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/scott-webb-1ddol8rgUH8-unsplash-1665499122635.jpg",
+		"id": "63457ff27fde6ad77416bee2"
+	},
+	{
+		"_id": "634580e67fde6ad77416bee9",
+		"thumbnail": "florian-schmidinger-b_79nOqf95I-unsplash-1665499366547.jpg",
+		"description": "Photo by Florian Schmidinger on Unsplash",
+		"price": 1112,
+		"location": "Published on February 21, 2020 (No Location)",
+		"status": false,
+		"user": "633b0e17561dafabb24af426",
+		"__v": 0,
+		"thumbnail_url": "http://localhost:3333/files/florian-schmidinger-b_79nOqf95I-unsplash-1665499366547.jpg",
+		"id": "634580e67fde6ad77416bee9"
+	}
+]

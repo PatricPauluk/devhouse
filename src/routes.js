@@ -2,6 +2,7 @@ import { Router } from 'express'; // requisita APENAS A PARTE DE ROTEAMENTO do e
 import SessionController from './controllers/SessionController';
 import HouseController from './controllers/HouseController';
 import DashboardController from './controllers/DashboardController';
+import ReserveController from './controllers/ReserveController';
 import multer from 'multer';
 import uploadConfig from './config/upload';
 
@@ -42,6 +43,7 @@ routes.get('/houses', HouseController.index); // Busca/exibe casas
 routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.update); // Atualiza casa
 routes.delete('/houses', HouseController.destroy); // Exclui casa
 routes.get('/dashboard', DashboardController.show); // Exibe todas as casas cadastradas de um usuário
+routes.post('/houses/:house_id/reserve', ReserveController.store); // Reservar casa para usuário
 
 // exporta as rotas criadas para serem acessadas
 // module.exports = routes; // metodo antigo
