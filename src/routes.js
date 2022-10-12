@@ -44,6 +44,8 @@ routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.upda
 routes.delete('/houses', HouseController.destroy); // Exclui casa
 routes.get('/dashboard', DashboardController.show); // Exibe todas as casas cadastradas de um usuário
 routes.post('/houses/:house_id/reserve', ReserveController.store); // Reservar casa para usuário
+routes.get('/reserves', ReserveController.index); // Listagem de reservas
+routes.delete('/reserves/cancel', ReserveController.destroy); // Cancelamento de reservas
 
 // exporta as rotas criadas para serem acessadas
 // module.exports = routes; // metodo antigo

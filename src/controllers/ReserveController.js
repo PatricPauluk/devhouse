@@ -4,6 +4,27 @@ import House from '../models/House';
 
 class ReserveController{
 
+    // Listagem de Reservas
+    async index(req, res){
+        const { user_id } = req.headers;
+
+        // Busca as reservas por ID do usuário populando com os dados da casa
+        const reserves = await Reserve.find({ user: user_id }).populate('house');
+
+        return res.json(reserves);
+    }
+
+    // Cancelamento de reservas
+    async destroy(req, res){
+        const { reserve_id } = req.body;
+
+        // Busca a reserva pelo ID e deleta
+        await Reserve.findByIdAndDelete({ _id: reserve_id });
+
+        return res.send();
+    }
+
+    // Fazer uma reserva
     async store(req, res){
         const { user_id } = req.headers; // Captura o ID do usuário no header
         const { house_id } = req.params; // Captura o ID da casa nos parâmetros da URL
