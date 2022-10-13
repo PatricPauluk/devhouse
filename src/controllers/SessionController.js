@@ -14,6 +14,7 @@
 
 // Importa modelo de Usuários para trabalhar no controller
 import User from "../models/User";
+import * as Yup from "yup";
 
 class SessionController{
 
@@ -50,9 +51,17 @@ class SessionController{
     */
     async store(req, res){
         
+        const schema = Yup.object().shape({
+            email: Yup.string().email().required(),
+        });
+
         // Captura o email informado no body
         const { email } = req.body; 
         
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Falha na validação.' });
+        }
+
         // Busca (verifica) no banco se já existe um email igual ao informado
         let user = await User.findOne({ email });
 
