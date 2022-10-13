@@ -1,5 +1,6 @@
 import House from '../models/House';
 import User from '../models/User';
+import * as Yup from 'yup';
 
 class HouseController{
 
@@ -47,10 +48,24 @@ class HouseController{
 
         */
         
+        // Criando um schema com Yup para validação
+        const schema = Yup.object().shape({
+            // thumbnail não é necessário verificar, pois é enviada como um middleware pelas rotas
+            description: Yup.string().required(),
+            price: Yup.number().required(),
+            location: Yup.string().required(),
+            status: Yup.boolean().required(),
+        });
+
         // Captura de dados enviados pelo Insomnia (Multipart)
         const { filename } = req.file; // Thumbnail
         const { description, price, location, status } = req.body;
         const { user_id } = req.headers;
+
+        // Realiza a validação do schema
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Falha na validação.' });
+        }
 
         /* Cadastro no banco
 
@@ -75,11 +90,23 @@ class HouseController{
     // Atualizar casas
     async update(req, res) {
 
+        const schema = Yup.object().shape({
+            // thumbnail não é necessário verificar, pois é enviada como um middleware pelas rotas
+            description: Yup.string().required(),
+            price: Yup.number().required(),
+            location: Yup.string().required(),
+            status: Yup.boolean().required(),
+        });
+
         // Captura os dados informados
         const { filename } = req.file; // Thumbnail
         const { house_id } = req.params;
         const { description, price, location, status } = req.body;
         const { user_id } = req.headers;
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Falha na validação.' });
+        }
 
         // Captura o id do usuário logado e da casa a ser alterada
         const user = await User.findById(user_id);

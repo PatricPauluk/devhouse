@@ -84,6 +84,14 @@ yarn add cors
 
 ----------------------------------------------------------------------------------------------
 
+Yup
+
+Para tratar validações, importado nos controllers.
+
+yarn add yup
+
+----------------------------------------------------------------------------------------------
+
 Algumas notas antigas importantes estão no meu crud, da minha pasta de estudo.
 
 ----------------------------------------- Fim das Notas ---------------------------------------- */
