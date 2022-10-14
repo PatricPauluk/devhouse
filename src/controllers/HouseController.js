@@ -1,13 +1,12 @@
-import House from '../models/House';
-import User from '../models/User';
-import * as Yup from 'yup';
+import * as Yup from "yup";
+import House from "../models/House";
+import User from "../models/User";
 
-class HouseController{
-
+class HouseController {
     /* Listar casas disponíves
     Para listar as casas disponíveis, o filtro é enviado no query porams do Insomnia
     */
-    async index(req, res){
+    async index(req, res) {
         // Captura o status enviado pelo query params
         const { status } = req.query;
 
@@ -21,8 +20,7 @@ class HouseController{
     }
 
     // Cadastrar casas
-    async store(req, res){
-
+    async store(req, res) {
         /*  Primeiro envio teste. console.log(req.body);
         {
             description: 'Photo by Pixasquare on Unsplash',     
@@ -47,7 +45,7 @@ class HouseController{
         Temos acesso aos dados do arquivo, pois as configurações de uploads são passadas por parâmetro em routes.js
 
         */
-        
+
         // Criando um schema com Yup para validação
         const schema = Yup.object().shape({
             // thumbnail não é necessário verificar, pois é enviada como um middleware pelas rotas
@@ -63,8 +61,8 @@ class HouseController{
         const { user_id } = req.headers;
 
         // Realiza a validação do schema
-        if(!(await schema.isValid(req.body))){
-            return res.status(400).json({ error: 'Falha na validação.' });
+        if (!(await schema.isValid(req.body))) {
+            return res.status(400).json({ error: "Falha na validação." });
         }
 
         /* Cadastro no banco
@@ -84,12 +82,11 @@ class HouseController{
             status,
         });
 
-        return res.json(house)
+        return res.json(house);
     }
 
     // Atualizar casas
     async update(req, res) {
-
         const schema = Yup.object().shape({
             // thumbnail não é necessário verificar, pois é enviada como um middleware pelas rotas
             description: Yup.string().required(),
@@ -104,8 +101,8 @@ class HouseController{
         const { description, price, location, status } = req.body;
         const { user_id } = req.headers;
 
-        if(!(await schema.isValid(req.body))){
-            return res.status(400).json({ error: 'Falha na validação.' });
+        if (!(await schema.isValid(req.body))) {
+            return res.status(400).json({ error: "Falha na validação." });
         }
 
         // Captura o id do usuário logado e da casa a ser alterada
@@ -113,19 +110,22 @@ class HouseController{
         const houses = await House.findById(house_id);
 
         // Verifica se o usuário logado tem permissão para alterar a casa (se foi ele quem cadastrou)
-        if (String(user._id) !== String(houses.user)){
-            return res.status(401).json({ error: 'Não autorizado.' });
+        if (String(user._id) !== String(houses.user)) {
+            return res.status(401).json({ error: "Não autorizado." });
         }
 
         // Busca o id da casa a ser atualizada, e atualiza em seguida
-        await House.updateOne({ _id: house_id }, {
-            user: user_id,
-            thumbnail: filename,
-            description,
-            price,
-            location,
-            status,
-        });
+        await House.updateOne(
+            { _id: house_id },
+            {
+                user: user_id,
+                thumbnail: filename,
+                description,
+                price,
+                location,
+                status,
+            }
+        );
 
         // return res.json(houses);
         return res.send();
@@ -133,7 +133,6 @@ class HouseController{
 
     // Excluir casas
     async destroy(req, res) {
-
         // Captura o ID da casa e do Usuário
         const { house_id } = req.body;
         const { user_id } = req.headers;
@@ -143,15 +142,14 @@ class HouseController{
         const houses = await House.findById(house_id);
 
         // Verifica se o usuário logado tem permissão para excluir a casa (se foi ele quem cadastrou)
-        if (String(user._id) !== String(houses.user)){
-            return res.status(401).json({ error: 'Não autorizado.' });
+        if (String(user._id) !== String(houses.user)) {
+            return res.status(401).json({ error: "Não autorizado." });
         }
 
         await House.findByIdAndDelete({ _id: house_id });
 
-        return res.json({ message: 'Excluída com sucesso!' })
+        return res.json({ message: "Excluída com sucesso!" });
     }
-
 }
 
 export default new HouseController();

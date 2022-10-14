@@ -1,21 +1,22 @@
-import Reserve from '../models/Reserve';
-import User from '../models/User';
-import House from '../models/House';
+import Reserve from "../models/Reserve";
+import User from "../models/User";
+import House from "../models/House";
 
-class ReserveController{
-
+class ReserveController {
     // Listagem de Reservas
-    async index(req, res){
+    async index(req, res) {
         const { user_id } = req.headers;
 
         // Busca as reservas por ID do usuário populando com os dados da casa
-        const reserves = await Reserve.find({ user: user_id }).populate('house');
+        const reserves = await Reserve.find({ user: user_id }).populate(
+            "house"
+        );
 
         return res.json(reserves);
     }
 
     // Cancelamento de reservas
-    async destroy(req, res){
+    async destroy(req, res) {
         const { reserve_id } = req.body;
 
         // Busca a reserva pelo ID e deleta
@@ -25,7 +26,7 @@ class ReserveController{
     }
 
     // Fazer uma reserva
-    async store(req, res){
+    async store(req, res) {
         const { user_id } = req.headers; // Captura o ID do usuário no header
         const { house_id } = req.params; // Captura o ID da casa nos parâmetros da URL
         const { date } = req.body; // Captura a data escrita no body (JSON)
@@ -36,17 +37,17 @@ class ReserveController{
         const user = await User.findById(user_id);
 
         // Se a casa não existir...
-        if(!house){
-            return res.status(400).json({ error: 'Essa casa não existe.' });
+        if (!house) {
+            return res.status(400).json({ error: "Essa casa não existe." });
         }
         // Se o status da casa for negativo...
-        if(house.status !== true){
-            return res.status(400).json({ error: 'Solicitação indisponível.' });
+        if (house.status !== true) {
+            return res.status(400).json({ error: "Solicitação indisponível." });
         }
 
         // Verifica se o ID do usuário é o mesmo do dono da casa
-        if(String(user_id) === String(house.user)){
-            return res.status(401).json({ error: 'Reserva não permitida.' });
+        if (String(user_id) === String(house.user)) {
+            return res.status(401).json({ error: "Reserva não permitida." });
         }
 
         // Cria a reserva
@@ -56,12 +57,11 @@ class ReserveController{
             date,
         });
 
-        await reserve.populate('house');
-        await reserve.populate('user');
+        await reserve.populate("house");
+        await reserve.populate("user");
 
         return res.json(reserve);
     }
-
 }
 
 export default new ReserveController();

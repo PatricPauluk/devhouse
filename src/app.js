@@ -1,15 +1,14 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import path from 'path';
-import cors from 'cors';
-import routes from './routes'; // requisita o arquivo routes.js (não é uma dependência!)
-
+/* eslint-disable max-len */
+import express from "express";
+import mongoose from "mongoose";
+import path from "path";
+import cors from "cors";
+import routes from "./routes"; // requisita o arquivo routes.js (não é uma dependência!)
 
 /* -------------------------------- Notas Gerais de Configuração --------------------------------
 
-
 O objetivo deste software é ser o meu maior suporte de todos para a criação de qualquer
-aplicação. Sempre que eu precisar criar uma aplicação esta vai ser a base, então vai ser o 
+aplicação. Sempre que eu precisar criar uma aplicação esta vai ser a base, então vai ser o
 melhor documentado possível.
 
 ----------------------------------------------------------------------------------------------
@@ -92,10 +91,65 @@ yarn add yup
 
 ----------------------------------------------------------------------------------------------
 
+Extensões:
+EditorConfig for VSCode
+ESLint
+
+Instalado ESLint para padrões de código.
+
+yarn add eslint -D
+
+Caminho para arrumar erros após a execução do ESLint:
+1. Ctrl + Shift + P
+2. Busca por: Open User Settings
+3. Cola o código abaixo, e salva:
+
+  //EsLint Config
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autofix": true
+    },
+    {
+      "language": "typescript",
+      "autofix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autofix": true
+    },
+  ],
+
+Também foram feitas alterações no .eslintrc.js
+
+Prettier
+
+Foi instalado a extensão prettier para o código ficar mais bonito.
+Também foi instalado no terminal:
+
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+Instala o prettier, a configuração dele com ESLint e o plugin dele com o mesmo.
+
+Também foi criado um arquivo ".prettierrc" na raiz, com informações pra evitar conflitos.
+"singleQuote": true // utilizar aspas simples
+
+Para arrumar todos os arquvos conforme os padrões de código:
+yarn eslint --fix src --ext .js
+
+----------------------------------------------------------------------------------------------
+
+Instalar as dependências caso esteja sem a pasta node_modules: yarn
+
+----------------------------------------------------------------------------------------------
+
 Algumas notas antigas importantes estão no meu crud, da minha pasta de estudo.
 
 ----------------------------------------- Fim das Notas ---------------------------------------- */
-
 
 class App {
     // quando a classe app for chamada, o método construtor é o primeiro a ser iniciado automáticamente
@@ -104,12 +158,13 @@ class App {
         this.server = express();
 
         // connection string
-        const URI = 'mongodb+srv://papauluk:SYTwbyWg59L05zmx@devhouse.hyory8h.mongodb.net/?retryWrites=true&w=majority';
+        const URI =
+            "mongodb+srv://papauluk:SYTwbyWg59L05zmx@devhouse.hyory8h.mongodb.net/?retryWrites=true&w=majority";
 
         // conecta ao banco de dados mongodb
         mongoose.connect(URI, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
         });
 
         // middlewares e routes devem ser chamados no constructor para serem iniciados
@@ -118,14 +173,13 @@ class App {
     }
 
     middlewares() {
-
         // libera a API a ser utilizada por qualquer domínio
         this.server.use(cors());
 
         // uma rota criada dentro dos middlewares, para visualizar a thumbnail retornada
         this.server.use(
-            '/files',
-            express.static(path.resolve(__dirname, '..', 'uploads'))
+            "/files",
+            express.static(path.resolve(__dirname, "..", "uploads"))
         );
 
         // consta que vai usar JSON no express
@@ -136,7 +190,6 @@ class App {
         // chama as rotas da importação
         this.server.use(routes);
     }
-
 }
 
 // exporta a classe App (selecionando o server)
